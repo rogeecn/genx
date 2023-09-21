@@ -20,12 +20,12 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 
-	"gorm.io/gen/helper"
-	"gorm.io/gen/internal/generate"
-	"gorm.io/gen/internal/model"
-	"gorm.io/gen/internal/parser"
-	tmpl "gorm.io/gen/internal/template"
-	"gorm.io/gen/internal/utils/pools"
+	"github.com/rogeecn/genx/helper"
+	"github.com/rogeecn/genx/internal/generate"
+	"github.com/rogeecn/genx/internal/model"
+	"github.com/rogeecn/genx/internal/parser"
+	tmpl "github.com/rogeecn/genx/internal/template"
+	"github.com/rogeecn/genx/internal/utils/pools"
 )
 
 // T generic type
@@ -89,8 +89,8 @@ func (i *genInfo) methodInGenInfo(m *generate.InterfaceMethod) bool {
 type Generator struct {
 	Config
 
-	Data   map[string]*genInfo                  //gen query data
-	models map[string]*generate.QueryStructMeta //gen model data
+	Data   map[string]*genInfo                  // gen query data
+	models map[string]*generate.QueryStructMeta // gen model data
 }
 
 // UseDB set db connection
@@ -567,7 +567,7 @@ func (g *Generator) output(fileName string, content []byte) error {
 		}
 		return fmt.Errorf("cannot format file: %w", err)
 	}
-	return ioutil.WriteFile(fileName, result, 0640)
+	return ioutil.WriteFile(fileName, result, 0o640)
 }
 
 func (g *Generator) pushQueryStructMeta(meta *generate.QueryStructMeta) (*genInfo, error) {

@@ -3,8 +3,7 @@ package gen
 import (
 	"fmt"
 
-	"gorm.io/datatypes"
-	"gorm.io/gen/field"
+	"github.com/rogeecn/genx/field"
 	"gorm.io/gorm/clause"
 )
 
@@ -13,25 +12,20 @@ func Cond(exprs ...clause.Expression) []Condition {
 	return exprToCondition(exprs...)
 }
 
-var _ Condition = &condContainer{}
+var _ Condition = &CondContainer{}
 
-type condContainer struct {
+type CondContainer struct {
 	value interface{}
 	err   error
 }
 
-func (c *condContainer) BeCond() interface{} { return c.value }
-func (c *condContainer) CondError() error    { return c.err }
+func (c *CondContainer) BeCond() interface{} { return c.value }
+func (c *CondContainer) CondError() error    { return c.err }
 
 func exprToCondition(exprs ...clause.Expression) []Condition {
 	conds := make([]Condition, 0, len(exprs))
 	for _, e := range exprs {
-		switch e := e.(type) {
-		case *datatypes.JSONQueryExpression, *datatypes.JSONOverlapsExpression, *datatypes.JSONArrayExpression:
-			conds = append(conds, &condContainer{value: e})
-		default:
-			conds = append(conds, &condContainer{err: fmt.Errorf("unsupported Expression %T to converted to Condition", e)})
-		}
+		conds = append(conds, &CondContainer{value: e})
 	}
 	return conds
 }
@@ -50,7 +44,7 @@ func condToExpression(conds []Condition) ([]clause.Expression, error) {
 		}
 
 		switch cond.(type) {
-		case *condContainer, field.Expr, SubQuery:
+		case *CondContainer, field.Expr, SubQuery:
 		default:
 			return nil, fmt.Errorf("unsupported condition: %+v", cond)
 		}

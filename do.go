@@ -12,8 +12,8 @@ import (
 	"gorm.io/gorm/clause"
 	"gorm.io/gorm/schema"
 
-	"gorm.io/gen/field"
-	"gorm.io/gen/helper"
+	"github.com/rogeecn/genx/field"
+	"github.com/rogeecn/genx/helper"
 )
 
 // ResultInfo query/execute info
@@ -43,10 +43,8 @@ func (d DO) getInstance(db *gorm.DB) *DO {
 
 type doOptions func(*gorm.DB) *gorm.DB
 
-var (
-	// Debug use DB in debug mode
-	Debug doOptions = func(db *gorm.DB) *gorm.DB { return db.Debug() }
-)
+// Debug use DB in debug mode
+var Debug doOptions = func(db *gorm.DB) *gorm.DB { return db.Debug() }
 
 // UseDB specify a db connection(*gorm.DB)
 func (d *DO) UseDB(db *gorm.DB, opts ...DOOption) {
@@ -96,7 +94,7 @@ func (d *DO) indirect(value interface{}) reflect.Type {
 // UseTable specify table name
 func (d *DO) UseTable(tableName string) {
 	d.db = d.db.Table(tableName).Session(new(gorm.Session))
-	//d.db.Statement.Schema.Table=tableName
+	// d.db.Statement.Schema.Table=tableName
 	d.tableName = tableName
 }
 

@@ -4,11 +4,13 @@ import (
 	"context"
 	"sync"
 
-	"gorm.io/gen/tests/.expect/dal_test/query"
+	"github.com/rogeecn/genx/tests/.expect/dal_test/query"
 )
 
-var useOnce sync.Once
-var ctx = context.Background()
+var (
+	useOnce sync.Once
+	ctx     = context.Background()
+)
 
 func CRUDInit() {
 	query.Use(DB)

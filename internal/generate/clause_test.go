@@ -3,7 +3,7 @@ package generate
 import (
 	"testing"
 
-	"gorm.io/gen/internal/parser"
+	"github.com/rogeecn/genx/internal/parser"
 )
 
 func checkBuildExpr(t *testing.T, SQL string, splitResult, generateResult []string, i *InterfaceMethod) {
@@ -34,10 +34,9 @@ func checkBuildExpr(t *testing.T, SQL string, splitResult, generateResult []stri
 			t.Errorf("SQL expects \nexp:%v \ngot:%v", generateResult[index], i.Section.Tmpls[index])
 		}
 	}
-
 }
-func TestClause(t *testing.T) {
 
+func TestClause(t *testing.T) {
 	testcases := []struct {
 		SQL            string
 		SplitResult    []string
@@ -159,7 +158,7 @@ func TestClause(t *testing.T) {
 }
 
 var m = func() *InterfaceMethod {
-	var m = new(InterfaceMethod)
+	m := new(InterfaceMethod)
 	m.Table = "users"
 	m.Params = []parser.Param{
 		{
@@ -178,5 +177,4 @@ var m = func() *InterfaceMethod {
 	}
 
 	return m
-
 }

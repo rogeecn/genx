@@ -1,4 +1,4 @@
-module gorm.io/gen
+module github.com/rogeecn/genx
 
 go 1.18
 

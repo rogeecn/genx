@@ -10,7 +10,7 @@ import (
 	"gorm.io/gorm/clause"
 	"gorm.io/hints"
 
-	"gorm.io/gen/field"
+	"github.com/rogeecn/genx/field"
 )
 
 var (
@@ -22,21 +22,17 @@ var (
 
 type stmtOpt func(*gorm.Statement) *gorm.Statement
 
-var (
-	// withFROM add FROM clause
-	withFROM stmtOpt = func(stmt *gorm.Statement) *gorm.Statement {
-		stmt.AddClause(clause.From{})
-		return stmt
-	}
-
-	// // withSELECT add SELECT clause
-	// withSELECT stmtOpt = func(stmt *gorm.Statement) *gorm.Statement {
-	// 	if _, ok := stmt.Clauses["SELECT"]; !ok {
-	// 		stmt.AddClause(clause.Select{Distinct: stmt.Distinct})
-	// 	}
-	// 	return stmt
-	// }
-)
+// withFROM add FROM clause
+var withFROM stmtOpt = func(stmt *gorm.Statement) *gorm.Statement {
+	stmt.AddClause(clause.From{})
+	return stmt
+} // // withSELECT add SELECT clause
+// withSELECT stmtOpt = func(stmt *gorm.Statement) *gorm.Statement {
+// 	if _, ok := stmt.Clauses["SELECT"]; !ok {
+// 		stmt.AddClause(clause.Select{Distinct: stmt.Distinct})
+// 	}
+// 	return stmt
+// }
 
 func checkBuildExpr(t *testing.T, e SubQuery, opts []stmtOpt, result string, vars []interface{}) {
 	stmt := build(e.underlyingDB().Statement, opts...)

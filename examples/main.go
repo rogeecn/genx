@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"gorm.io/gen/examples/biz"
-	"gorm.io/gen/examples/conf"
-	"gorm.io/gen/examples/dal"
-	"gorm.io/gen/examples/dal/query"
+	"github.com/rogeecn/genx/examples/biz"
+	"github.com/rogeecn/genx/examples/conf"
+	"github.com/rogeecn/genx/examples/dal"
+	"github.com/rogeecn/genx/examples/dal/query"
 )
 
 func init() {

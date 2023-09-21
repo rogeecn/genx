@@ -7,7 +7,7 @@
 ## 安装
 
 ```shell
- go install gorm.io/gen/tools/gentool@latest
+ go install github.com/rogeecn/genx/tools/gentool@latest
 ```
 
 ## 使用方式
