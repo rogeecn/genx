@@ -1,4 +1,4 @@
-package gen
+package genx
 
 // DOOption gorm option interface
 type DOOption interface {
@@ -6,8 +6,7 @@ type DOOption interface {
 	AfterInitialize(*DO) error
 }
 
-type DOConfig struct {
-}
+type DOConfig struct{}
 
 // Apply update config to new config
 func (c *DOConfig) Apply(config *DOConfig) error {

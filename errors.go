@@ -1,8 +1,6 @@
-package gen
+package genx
 
 import "errors"
 
-var (
-	// ErrEmptyCondition empty condition
-	ErrEmptyCondition = errors.New("empty condition")
-)
+// ErrEmptyCondition empty condition
+var ErrEmptyCondition = errors.New("empty condition")
